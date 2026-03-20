@@ -159,10 +159,13 @@ class TestAIFeatures(unittest.TestCase):
         
         with open(cf_path, 'r', encoding='utf-8') as f:
             content = f.read()
-            self.assertIn('a550622d7882404c876763f67558f7f1', content, "AI密钥已配置")
+            # 检查使用环境变量而不是硬编码
+            self.assertIn('process.env.GLM_API_KEY', content, "使用环境变量存储密钥")
             self.assertIn('glm-4-plus', content, "使用GLM-4-Plus模型")
+            # 确保没有硬编码密钥
+            self.assertNotIn('a550622d7882404c876763f67558f7f1', content, "不应硬编码密钥")
         
-        print("✅ AI配置正确")
+        print("✅ AI配置正确（使用环境变量）")
     
     def test_prompts(self):
         """测试提示词"""
