@@ -12,11 +12,11 @@ cloud.init({
 const db = cloud.database();
 const _ = db.command;
 
-// GLM配置
+// GLM配置 - 使用环境变量
 const AI_CONFIG = {
   glm: {
     baseURL: 'https://open.bigmodel.cn/api/paas/v4',
-    apiKey: 'a550622d7882404c876763f67558f7f1.kwhxFSQDjLGioM0h',
+    apiKey: process.env.GLM_API_KEY || '',  // 从环境变量读取，不要硬编码
     model: 'glm-4-plus'
   }
 };
