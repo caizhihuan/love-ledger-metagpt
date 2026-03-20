@@ -1,0 +1,25 @@
+<!-- 个人中心页 -->
+<view class="container">
+  <view class="user-card">
+    <image class="avatar" src="{{userInfo.avatarUrl}}" mode="aspectFill"></image>
+    <text class="nickname">{{userInfo.nickName}}</text>
+    <text class="status">{{isBound ? '已绑定 💕' : '未绑定'}}</text>
+  </view>
+  
+  <view class="menu-section">
+    <view class="menu-item" bindtap="goToBind" wx:if="{{!isBound}}">
+      <text class="menu-icon">💕</text>
+      <text class="menu-title">绑定伴侣</text>
+    </view>
+    
+    <view class="menu-item" bindtap="manageGroup" wx:if="{{isBound}}">
+      <text class="menu-icon">👫</text>
+      <text class="menu-title">情侣管理</text>
+    </view>
+    
+    <view class="menu-item" bindtap="about">
+      <text class="menu-icon">ℹ️</text>
+      <text class="menu-title">关于恋账</text>
+    </view>
+  </view>
+</view>

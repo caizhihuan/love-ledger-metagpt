@@ -1,0 +1,141 @@
+<!--恋账 - 记账首页-->
+<view class="container">
+  <!-- 顶部日期 -->
+  <view class="header">
+    <view class="date-info">
+      <text class="month">{{currentMonth}}月</text>
+      <text class="day">{{currentDay}}</text>
+      <text class="weekday">周{{weekday}}</text>
+    </view>
+    
+    <view class="summary" wx:if="{{isBound}}">
+      <view class="summary-item">
+        <text class="label">今日支出</text>
+        <text class="amount expense">{{todayExpense}}</text>
+      </view>
+      <view class="summary-item">
+        <text class="label">本月支出</text>
+        <text class="amount">{{monthExpense}}</text>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 快速记账 -->
+  <view class="quick-add">
+    <input 
+      class="text-input"
+      placeholder="说点什么... 例如：午餐花了30元"
+      value="{{inputText}}"
+      bindinput="onInputChange"
+      bindconfirm="analyzeText"
+    />
+    <button class="ai-btn" bindtap="analyzeText" disabled="{{!inputText}}">
+      <text>✨ AI记账</text>
+    </button>
+  </view>
+  
+  <!-- AI识别结果 -->
+  <view class="ai-preview" wx:if="{{aiResult}}">
+    <view class="preview-header">
+      <text class="preview-title">AI识别结果</text>
+      <text class="confidence">{{aiResult.confidence * 100}}%</text>
+    </view>
+    
+    <view class="preview-content">
+      <view class="preview-item">
+        <text class="label">金额</text>
+        <input class="value-input" type="digit" value="{{aiResult.amount}}" bindinput="onAmountChange" />
+      </view>
+      
+      <view class="preview-item">
+        <text class="label">分类</text>
+        <picker mode="selector" range="{{categories}}" range-key="name" value="{{categoryIndex}}" bindchange="onCategoryChange">
+          <view class="picker">{{categories[categoryIndex].icon}} {{categories[categoryIndex].name}}</view>
+        </picker>
+      </view>
+      
+      <view class="preview-item">
+        <text class="label">备注</text>
+        <input class="value-input" value="{{aiResult.description}}" bindinput="onDescChange" />
+      </view>
+    </view>
+    
+    <view class="preview-actions">
+      <button class="cancel-btn" bindtap="cancelAI">取消</button>
+      <button class="confirm-btn" bindtap="confirmAI">确认</button>
+    </view>
+  </view>
+  
+  <!-- 快捷按钮 -->
+  <view class="quick-actions">
+    <view class="action-btn" bindtap="chooseImage">
+      <text class="icon">📷</text>
+      <text class="text">拍照记账</text>
+    </view>
+    
+    <view class="action-btn" bindtap="manualAdd">
+      <text class="icon">✏️</text>
+      <text class="text">手动记账</text>
+    </view>
+  </view>
+  
+  <!-- 分类快捷记账 -->
+  <view class="category-section">
+    <view class="section-header">
+      <text class="title">快速记账</text>
+      <view class="type-tabs">
+        <text class="tab {{currentType === 'expense' ? 'active' : ''}}" bindtap="switchType" data-type="expense">支出</text>
+        <text class="tab {{currentType === 'income' ? 'active' : ''}}" bindtap="switchType" data-type="income">收入</text>
+      </view>
+    </view>
+    
+    <view class="category-grid">
+      <view class="category-item" wx:for="{{displayCategories}}" wx:key="name" bindtap="selectCategory" data-category="{{item.name}}">
+        <text class="cat-icon">{{item.icon}}</text>
+        <text class="cat-name">{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 手动记账弹窗 -->
+<view class="modal" wx:if="{{showManualModal}}" bindtap="closeManualModal">
+  <view class="modal-content" catchtap="preventClose">
+    <view class="modal-header">
+      <text class="modal-title">记一笔</text>
+      <text class="close-btn" bindtap="closeManualModal">✕</text>
+    </view>
+    
+    <view class="modal-body">
+      <view class="amount-input-section">
+        <text class="currency">¥</text>
+        <input class="amount-input" type="digit" placeholder="0.00" value="{{manualAmount}}" bindinput="onManualAmountInput" focus="{{showManualModal}}" />
+      </view>
+      
+      <view class="form-item">
+        <text class="form-label">分类</text>
+        <scroll-view class="category-scroll" scroll-x>
+          <view class="cat-option {{manualCategory === item.name ? 'selected' : ''}}" wx:for="{{displayCategories}}" wx:key="name" bindtap="selectManualCategory" data-category="{{item.name}}">
+            <text>{{item.icon}} {{item.name}}</text>
+          </view>
+        </scroll-view>
+      </view>
+      
+      <view class="form-item">
+        <text class="form-label">备注</text>
+        <input class="form-input" placeholder="添加备注..." value="{{manualDesc}}" bindinput="onManualDescInput" />
+      </view>
+      
+      <view class="form-item">
+        <text class="form-label">日期</text>
+        <picker mode="date" value="{{manualDate}}" bindchange="onManualDateChange">
+          <view class="form-picker">{{manualDate}}</view>
+        </picker>
+      </view>
+    </view>
+    
+    <view class="modal-footer">
+      <button class="submit-btn" bindtap="submitManual">保存</button>
+    </view>
+  </view>
+</view>

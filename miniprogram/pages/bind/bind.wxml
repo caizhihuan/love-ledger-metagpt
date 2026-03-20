@@ -1,0 +1,36 @@
+<!-- 绑定页 -->
+<view class="container">
+  <view class="header">
+    <text class="title">💕 绑定伴侣</text>
+    <text class="subtitle">绑定后即可一起记账</text>
+  </view>
+  
+  <view class="bind-options" wx:if="{{!showInvite && !showJoin}}">
+    <view class="option-card" bindtap="createGroup">
+      <text class="option-icon">💌</text>
+      <text class="option-title">创建情侣组</text>
+      <text class="option-desc">生成邀请码</text>
+    </view>
+    
+    <view class="divider"><text>或</text></view>
+    
+    <view class="option-card" bindtap="joinGroup">
+      <text class="option-icon">🎫</text>
+      <text class="option-title">加入情侣组</text>
+      <text class="option-desc">输入邀请码</text>
+    </view>
+  </view>
+  
+  <view class="invite-section" wx:if="{{showInvite}}">
+    <text class="invite-label">你的邀请码</text>
+    <text class="invite-code">{{inviteCode}}</text>
+    <button class="copy-btn" bindtap="copyCode">复制邀请码</button>
+    <button class="back-btn" bindtap="goBack">返回</button>
+  </view>
+  
+  <view class="join-section" wx:if="{{showJoin}}">
+    <input class="code-input" type="text" maxlength="6" placeholder="请输入6位邀请码" value="{{inputCode}}" bindinput="onCodeInput" />
+    <button class="join-btn" bindtap="confirmJoin">确认加入</button>
+    <button class="back-btn" bindtap="goBack">返回</button>
+  </view>
+</view>

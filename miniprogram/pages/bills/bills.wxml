@@ -1,0 +1,28 @@
+<!--其他页面的简化代码 - 我将一次性生成所有文件-->
+
+<!-- 账单列表页 -->
+<view class="container">
+  <view class="filter-bar">
+    <picker mode="date" fields="month" value="{{selectedMonth}}" bindchange="onMonthChange">
+      <view class="month-picker">{{selectedMonth}} ▼</view>
+    </picker>
+  </view>
+  
+  <view class="empty" wx:if="{{bills.length === 0}}">
+    <text class="empty-icon">📝</text>
+    <text class="empty-text">暂无账单</text>
+  </view>
+  
+  <view class="bill-list">
+    <view class="bill-item" wx:for="{{bills}}" wx:key="_id">
+      <view class="bill-icon">{{item.categoryIcon}}</view>
+      <view class="bill-info">
+        <text class="bill-category">{{item.category}}</text>
+        <text class="bill-desc">{{item.description}}</text>
+      </view>
+      <text class="bill-amount {{item.amount > 0 ? 'income' : 'expense'}}">
+        {{item.amount > 0 ? '+' : ''}}{{item.amount}}
+      </text>
+    </view>
+  </view>
+</view>

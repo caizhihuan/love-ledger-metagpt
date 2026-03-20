@@ -1,0 +1,9 @@
+{
+  "name": "bill_processor",
+  "version": "1.0.0",
+  "description": "恋账核心云函数 - AI账单处理（GLM-5集成）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

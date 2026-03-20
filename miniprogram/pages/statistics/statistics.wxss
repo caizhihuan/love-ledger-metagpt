@@ -1,0 +1,11 @@
+/* 统计页样式 */
+.container { padding: 32rpx; background: #F8F8F8; min-height: 100vh; }
+.overview-card { display: flex; background: linear-gradient(135deg, #FF6B9D, #FF8E9E); padding: 32rpx; border-radius: 20rpx; color: white; margin-bottom: 32rpx; }
+.stat-item { flex: 1; text-align: center; }
+.stat-item .label { display: block; font-size: 24rpx; opacity: 0.9; margin-bottom: 8rpx; }
+.stat-item .value { display: block; font-size: 36rpx; font-weight: 700; }
+.section { background: white; padding: 24rpx; border-radius: 20rpx; margin-bottom: 24rpx; }
+.section-title { font-size: 32rpx; font-weight: 600; margin-bottom: 16rpx; display: block; }
+.category-list { display: flex; flex-direction: column; gap: 16rpx; }
+.category-item { display: flex; justify-content: space-between; padding: 16rpx; background: #f8f8f8; border-radius: 12rpx; }
+.report-btn { background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 48rpx; padding: 24rpx; margin-top: 32rpx; }

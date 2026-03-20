@@ -1,0 +1,13 @@
+# 忽略文件
+
+# 临时文件
+*.log
+*.tmp
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Node modules (if any)
+node_modules/

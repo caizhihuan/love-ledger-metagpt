@@ -1,0 +1,50 @@
+/* 恋账 - 全局样式 */
+
+page {
+  --primary-color: #FF6B9D;
+  --primary-light: #FF8E9E;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC';
+  background: #F8F8F8;
+  color: #333;
+  font-size: 28rpx;
+}
+
+.container {
+  min-height: 100vh;
+  padding: 32rpx;
+  box-sizing: border-box;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  color: white;
+  border-radius: 48rpx;
+  padding: 24rpx;
+  text-align: center;
+  font-weight: 600;
+}
+
+.card {
+  background: white;
+  border-radius: 20rpx;
+  padding: 24rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.04);
+  margin-bottom: 16rpx;
+}
+
+.text-pink {
+  color: var(--primary-color);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-between {
+  justify-content: space-between;
+  align-items: center;
+}

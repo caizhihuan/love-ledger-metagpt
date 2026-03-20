@@ -1,0 +1,25 @@
+<!-- 统计页 -->
+<view class="container">
+  <view class="overview-card">
+    <view class="stat-item">
+      <text class="label">本月支出</text>
+      <text class="value">{{stats.totalExpense}}</text>
+    </view>
+    <view class="stat-item">
+      <text class="label">本月收入</text>
+      <text class="value">{{stats.totalIncome}}</text>
+    </view>
+  </view>
+  
+  <view class="section">
+    <text class="section-title">分类统计</text>
+    <view class="category-list">
+      <view class="category-item" wx:for="{{categories}}" wx:key="category">
+        <text class="cat-name">{{item.category}}</text>
+        <text class="cat-amount">{{item.amount}}</text>
+      </view>
+    </view>
+  </view>
+  
+  <button class="report-btn" bindtap="generateReport">生成AI周报</button>
+</view>

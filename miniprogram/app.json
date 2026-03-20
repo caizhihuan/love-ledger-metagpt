@@ -1,0 +1,61 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/bills/bills",
+    "pages/statistics/statistics",
+    "pages/profile/profile",
+    "pages/bind/bind"
+  ],
+  "window": {
+    "navigationBarTitleText": "恋账",
+    "navigationBarBackgroundColor": "#FF6B9D",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#F8F8F8",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#FF6B9D",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "记账",
+        "iconPath": "images/tab-bill.png",
+        "selectedIconPath": "images/tab-bill-active.png"
+      },
+      {
+        "pagePath": "pages/bills/bills",
+        "text": "账单",
+        "iconPath": "images/tab-list.png",
+        "selectedIconPath": "images/tab-list-active.png"
+      },
+      {
+        "pagePath": "pages/statistics/statistics",
+        "text": "统计",
+        "iconPath": "images/tab-chart.png",
+        "selectedIconPath": "images/tab-chart-active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "images/tab-profile.png",
+        "selectedIconPath": "images/tab-profile-active.png"
+      }
+    ]
+  },
+  "cloud": true,
+  "permission": {
+    "scope.userLocation": {
+      "desc": "用于记录消费地点"
+    }
+  },
+  "requiredPrivateInfos": [
+    "chooseImage",
+    "chooseMedia"
+  ],
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}
