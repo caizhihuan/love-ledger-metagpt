@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>恋账小程序 - UI预览</title>
+    <style>
+        * {
+            margin: 0;
+            padding:0;
+            box-sizing:border-box;
+        }
+        body {
+            font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC';
+            background:#F0F0F0;
+            padding:20px;
+        }
+        .container {
+            max-width:1200px;
+            margin:0 auto;
+        }
+        h1 {
+            text-align:center;
+            color:#FF6B9D;
+            margin-bottom:30px;
+        }
+        .phone-grid {
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
+            gap:30px;
+            justify-items:center;
+        }
+        .phone {
+            width:320px;
+            background:white;
+            border-radius:40px;
+            padding:20px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.2);
+            position:relative;
+        }
+        .phone::before {
+            content:'';
+            position:absolute;
+            top:10px;
+            left:50%;
+            transform:translateX(-50%);
+            width:80px;
+            height:6px;
+            background:#333;
+            border-radius:3px;
+        }
+        .phone-content {
+            margin-top:20px;
+            background:#F8F8F8;
+            border-radius:20px;
+            padding:16px;
+            min-height:500px;
+        }
+        .header {
+            background:linear-gradient(135deg, #FF6B9D 0%, #FF8E9E 100%);
+            border-radius:24px;
+            padding:32rpx;
+            color:white;
+            margin-bottom:16px;
+        }
+        .date-info {
+            display:flex;
+            gap:8px;
+            margin-bottom:20px;
+        }
+        .month { font-size:20px; }
+        .day { font-size:40px; font-weight:bold; }
+        .weekday { font-size:18px; opacity:0.9; }
+        .stats-row {
+            display:flex;
+            gap:16px;
+        }
+        .stat-box {
+            flex:1;
+            background:rgba(255,255,255,0.2);
+            padding:16px;
+            border-radius:12px;
+            backdrop-filter:blur(10px);
+        }
+        .stat-label { font-size:12px; opacity:0.9; }
+        .stat-value { font-size:20px; font-weight:bold; margin-top:4px; }
+        .ai-input {
+            background:white;
+            border-radius:24px;
+            padding:12px;
+            display:flex;
+            gap:8px;
+            margin-bottom:16px;
+        }
+        .ai-input input {
+            flex:1;
+            border:none;
+            font-size:14px;
+        }
+        .ai-btn {
+            background:linear-gradient(135deg, #FF6B9D, #FF8E9E);
+            color:white;
+            border:none;
+            padding:8px 16px;
+            border-radius:24px;
+            font-size:12px;
+            font-weight:bold;
+        }
+        .quick-actions {
+            display:flex;
+            gap:12px;
+            margin-bottom:16px;
+        }
+        .action-box {
+            flex:1;
+            background:white;
+            padding:20px 12px;
+            border-radius:12px;
+            text-align:center;
+        }
+        .action-icon { font-size:32px; display:block; }
+        .action-text { font-size:12px; color:#666; margin-top:4px; }
+        .categories-title {
+            font-size:18px;
+            font-weight:bold;
+            margin-bottom:12px;
+        }
+        .category-grid {
+            display:grid;
+            grid-template-columns:repeat(5, 1fr);
+            gap:8px;
+        }
+        .category-item {
+            background:white;
+            padding:16px 4px;
+            border-radius:12px;
+            text-align:center;
+        }
+        .cat-icon { font-size:24px; display:block; }
+        .cat-name { font-size:10px; color:#666; margin-top:4px; }
+        .bill-item {
+            background:white;
+            padding:16px;
+            border-radius:12px;
+            margin-bottom:12px;
+            display:flex;
+            align-items:center;
+            gap:12px;
+        }
+        .bill-icon {
+            width:40px;
+            height:40px;
+            background:#FFF5F7;
+            border-radius:8px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:20px;
+        }
+        .bill-info { flex:1; }
+        .bill-category { font-size:14px; font-weight:600; }
+        .bill-desc { font-size:11px; color:#999; margin-top:2px; }
+        .bill-amount { font-size:16px; font-weight:bold; }
+        .expense { color:#FF6B9D; }
+        .income { color:#52C41A; }
+        .chart-box {
+            background:white;
+            padding:20px;
+            border-radius:16px;
+            margin-bottom:16px;
+        }
+        .chart-title {
+            font-size:16px;
+            font-weight:600;
+            margin-bottom:16px;
+        }
+        .bar-chart {
+            display:flex;
+            gap:8px;
+            height:120px;
+            align-items:end;
+        }
+        .bar {
+            flex:1;
+            background:linear-gradient(180deg, #FF6B9D, #FF8E9E);
+            border-radius:4px 4px 0 0;
+        }
+        .profile-card {
+            background:linear-gradient(135deg, #FF6B9D, #FF8E9E);
+            padding:32px;
+            border-radius:20px;
+            text-align:center;
+            color:white;
+            margin-bottom:20px;
+        }
+        .avatar {
+            width:60px;
+            height:60px;
+            background:rgba(255,255,255,0.3);
+            border-radius:50%;
+            margin:0 auto 12px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:30px;
+        }
+        .nickname { font-size:18px; font-weight:600; margin-bottom:4px; }
+        .status { font-size:12px; opacity:0.9; }
+        .menu-item {
+            background:white;
+            padding:20px 16px;
+            border-radius:12px;
+            margin-bottom:8px;
+            display:flex;
+            align-items:center;
+            gap:12px;
+        }
+        .menu-icon { font-size:20px; }
+        .menu-title { font-size:14px; }
+        .page-title {
+            font-size:14px;
+            color:#666;
+            text-align:center;
+            margin-bottom:12px;
+            font-weight:600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💕 恋账小程序 - UI效果预览</h1>
+        
+        <div class="phone-grid">
+            <!-- 首页 -->
+            <div class="phone">
+                <div class="page-title">首页 - AI记账</div>
+                <div class="phone-content">
+                    <div class="header">
+                        <div class="date-info">
+                            <span class="month">3月</span>
+                            <span class="day">21</span>
+                            <span class="weekday">周六</span>
+                        </div>
+                        <div class="stats-row">
+                            <div class="stat-box">
+                                <div class="stat-label">今日支出</div>
+                                <div class="stat-value">¥128.50</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-label">本月支出</div>
+                                <div class="stat-value">¥3,256.00</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-input">
+                        <input placeholder="说点什么... 例如：午餐花了30元" />
+                        <button class="ai-btn">✨ AI记账</button>
+                    </div>
+                    
+                    <div class="quick-actions">
+                        <div class="action-box">
+                            <span class="action-icon">📷</span>
+                            <span class="action-text">拍照记账</span>
+                        </div>
+                        <div class="action-box">
+                            <span class="action-icon">✏️</span>
+                            <span class="action-text">手动记账</span>
+                        </div>
+                    </div>
+                    
+                    <div class="categories-title">快速记账</div>
+                    <div class="category-grid">
+                        <div class="category-item">
+                            <span class="cat-icon">🍔</span>
+                            <span class="cat-name">餐饮</span>
+                        </div>
+                        <div class="category-item">
+                            <span class="cat-icon">🚗</span>
+                            <span class="cat-name">交通</span>
+                        </div>
+                        <div class="category-item">
+                            <span class="cat-icon">🛒</span>
+                            <span class="cat-name">购物</span>
+                        </div>
+                        <div class="category-item">
+                            <span class="cat-icon">🎮</span>
+                            <span class="cat-name">娱乐</span>
+                        </div>
+                        <div class="category-item">
+                            <span class="cat-icon">📦</span>
+                            <span class="cat-name">其他</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 账单列表 -->
+            <div class="phone">
+                <div class="page-title">账单列表</div>
+                <div class="phone-content">
+                    <div class="categories-title" style="margin-bottom:20px;">2026年3月</div>
+                    
+                    <div class="bill-item">
+                        <div class="bill-icon">🍔</div>
+                        <div class="bill-info">
+                            <div class="bill-category">餐饮</div>
+                            <div class="bill-desc">午餐 - 沙县小吃</div>
+                        </div>
+                        <div class="bill-amount expense">-¥28.00</div>
+                    </div>
+                    
+                    <div class="bill-item">
+                        <div class="bill-icon">🚗</div>
+                        <div class="bill-info">
+                            <div class="bill-category">交通</div>
+                            <div class="bill-desc">打车 - 公司到家</div>
+                        </div>
+                        <div class="bill-amount expense">-¥35.50</div>
+                    </div>
+                    
+                    <div class="bill-item">
+                        <div class="bill-icon">💰</div>
+                        <div class="bill-info">
+                            <div class="bill-category">工资</div>
+                            <div class="bill-desc">3月工资</div>
+                        </div>
+                        <div class="bill-amount income">+¥15,000.00</div>
+                    </div>
+                    
+                    <div class="bill-item">
+                        <div class="bill-icon">🛒</div>
+                        <div class="bill-info">
+                            <div class="bill-category">购物</div>
+                            <div class="bill-desc">日用品 - 超市</div>
+                        </div>
+                        <div class="bill-amount expense">-¥156.80</div>
+                    </div>
+                    
+                    <div class="bill-item">
+                        <div class="bill-icon">🎮</div>
+                        <div class="bill-info">
+                            <div class="bill-category">娱乐</div>
+                            <div class="bill-desc">电影票</div>
+                        </div>
+                        <div class="bill-amount expense">-¥88.00</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 统计分析 -->
+            <div class="phone">
+                <div class="page-title">统计分析</div>
+                <div class="phone-content">
+                    <div class="stats-row" style="margin-bottom:20px;">
+                        <div class="stat-box" style="background:linear-gradient(135deg, #FF6B9D, #FF8E9E);">
+                            <div class="stat-label">本月支出</div>
+                            <div class="stat-value">¥3,256</div>
+                        </div>
+                        <div class="stat-box" style="background:linear-gradient(135deg, #52C41A, #73D13D);">
+                            <div class="stat-label">本月收入</div>
+                            <div class="stat-value">¥15,000</div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-box">
+                        <div class="chart-title">月度趋势</div>
+                        <div class="bar-chart">
+                            <div class="bar" style="height:60%"></div>
+                            <div class="bar" style="height:80%"></div>
+                            <div class="bar" style="height:45%"></div>
+                            <div class="bar" style="height:90%"></div>
+                            <div class="bar" style="height:70%"></div>
+                            <div class="bar" style="height:100%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-box">
+                        <div class="chart-title">分类占比</div>
+                        <div class="bill-item">
+                            <div class="bill-icon">🍔</div>
+                            <div class="bill-info">
+                                <div class="bill-category">餐饮</div>
+                            </div>
+                            <div class="bill-amount expense">35%</div>
+                        </div>
+                        <div class="bill-item">
+                            <div class="bill-icon">🚗</div>
+                            <div class="bill-info">
+                                <div class="bill-category">交通</div>
+                            </div>
+                            <div class="bill-amount expense">20%</div>
+                        </div>
+                        <div class="bill-item">
+                            <div class="bill-icon">🛒</div>
+                            <div class="bill-info">
+                                <div class="bill-category">购物</div>
+                            </div>
+                            <div class="bill-amount expense">25%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 个人中心 -->
+            <div class="phone">
+                <div class="page-title">个人中心</div>
+                <div class="phone-content">
+                    <div class="profile-card">
+                        <div class="avatar">👤</div>
+                        <div class="nickname">小甜甜</div>
+                        <div class="status">已绑定 💕</div>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <span class="menu-icon">👫</span>
+                        <span class="menu-title">情侣管理</span>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <span class="menu-icon">💰</span>
+                        <span class="menu-title">预算设置</span>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <span class="menu-icon">📊</span>
+                        <span class="menu-title">导出数据</span>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <span class="menu-icon">💬</span>
+                        <span class="menu-title">意见反馈</span>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <span class="menu-icon">ℹ️</span>
+                        <span class="menu-title">关于恋账</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 绑定页面 -->
+            <div class="phone">
+                <div class="page-title">绑定伴侣</div>
+                <div class="phone-content" style="text-align:center;">
+                    <div style="padding:40px 0;">
+                        <div style="font-size:48px; margin-bottom:16px;">💕</div>
+                        <div style="font-size:28px; font-weight:bold; color:#FF6B9D; margin-bottom:8px;">绑定伴侣</div>
+                        <div style="font-size:14px; color:#666;">绑定后即可一起记账</div>
+                    </div>
+                    
+                    <div class="menu-item" style="cursor:pointer;">
+                        <span class="menu-icon">💌</span>
+                        <span class="menu-title">创建情侣组</span>
+                    </div>
+                    
+                    <div style="padding:20px 0; color:#999;">或</div>
+                    
+                    <div class="menu-item" style="cursor:pointer;">
+                        <span class="menu-icon">🎫</span>
+                        <span class="menu-title">加入情侣组</span>
+                    </div>
+                    
+                    <div style="margin-top:30px; padding:20px;">
+                        <div style="font-size:12px; color:#666; margin-bottom:12px;">你的邀请码</div>
+                        <div style="font-size:40px; font-weight:bold; color:#FF6B9D; letter-spacing:8px; font-family:monospace; margin-bottom:16px;">ABC123</div>
+                        <button class="ai-btn" style="width:100%; padding:12px;">复制邀请码</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
