@@ -37,7 +37,14 @@
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
-    }
+    },
+    "compileWorklet": false,
+    "localPlugins": false,
+    "disableUseStrict": false,
+    "useCompilerPlugins": false,
+    "condition": false,
+    "swc": false,
+    "disableSWC": true
   },
   "compileType": "miniprogram",
   "libVersion": "2.32.0",
@@ -49,5 +56,6 @@
     "tabSize": 2
   },
   "cloudfunctionTemplateRoot": "cloudfunctions/",
-  "cloudbaseRoot": "cloudbaserc.json"
+  "cloudbaseRoot": "cloudbaserc.json/",
+  "simulatorPluginLibVersion": {}
 }
