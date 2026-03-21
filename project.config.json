@@ -48,6 +48,8 @@
     "tabIndent": "insertSpaces",
     "tabSize": 2
   },
+  "miniprogramRoot": "miniprogram/",
+  "cloudfunctionRoot": "cloudfunctions/",
   "cloudfunctionTemplateRoot": "cloudfunctions/",
   "cloudbaseRoot": "cloudbaserc.json"
 }
